@@ -14,7 +14,6 @@ spring.datasource.username=postgres
 spring.datasource.password= hna ktb mot de pass dyalek
 
 spring.datasource.driver-class-name=org.postgresql.Driver
-
 spring.jpa.hibernate.ddl-auto=create-drop
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
