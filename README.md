@@ -4,14 +4,14 @@
 
 ## Additional notes
   - Lprojet kaml kayn f src/main lfichiers akhrin kamlin kidiro khdmtom rasom bla matfham chno kayn tma exact (Unless u really want to)
-  - lfichier 'application.properties' diri fih hadchi (9bl creer database osmiha 'supermarket_db'):
+  - lfichier 'application.properties' dir fih mot de pass dyal sql (9bl creer database osmiha 'supermarket_db'):
 
 ```
 spring.application.name=SuperMarketManager
 spring.datasource.url=jdbc:postgresql://localhost:5432/supermarket_db
 spring.datasource.username=postgres
 
-spring.datasource.password= hna ktb mot de pass dyalek
+-> spring.datasource.password= hna ktb mot de pass dyalek
 
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.jpa.hibernate.ddl-auto=create-drop
