@@ -4,7 +4,7 @@
 
 ## Additional notes
   - Lprojet kaml kayn f src/main lfichiers akhrin kamlin kidiro khdmtom rasom bla matfham chno kayn tma exact (Unless u really want to)
-  - lfichier 'application.properties' diri fih hadchi:
+  - lfichier 'application.properties' diri fih hadchi (9bl creer database osmiha 'supermarket_db'):
 
 ```
 spring.application.name=SuperMarketManager
@@ -18,3 +18,5 @@ spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 spring.thymeleaf.check-template-location=false
 ```
+
+  - kol mara kat executer lcode dkhol n ```http://localhost:8080/``` bach tchof l'execution dcode
