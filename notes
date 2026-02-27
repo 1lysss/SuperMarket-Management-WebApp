@@ -1,0 +1,7 @@
+src/main/java/com/MyApp/
+├── model/         → Your entity classes (maps to DB tables)
+├── repository/    → Database access layer
+├── service/       → Business logic
+├── controller/    → HTTP endpoints (REST API)
+└── YourApplication.java  → Entry point
+------------------------------------------------------------------------
