@@ -3,8 +3,8 @@
   - "logs" kol mara tkml chihaja ktbha hna, github deja kidir nfs lkhdma mais bach nbsto l omor hitach hadi awel mra ghanzido 7ta had lfichier
 
 ## Additional notes
-  -Lprojet kaml kayn f src/main lfichiers akhrin kamlin kidiro khdmtom rasom bla matfham chno kayn tma exact (Unless u really want to)
-  -lfichier 'application.properties' diri fih hadchi:
+  - Lprojet kaml kayn f src/main lfichiers akhrin kamlin kidiro khdmtom rasom bla matfham chno kayn tma exact (Unless u really want to)
+  - lfichier 'application.properties' diri fih hadchi:
 
 ```
 spring.application.name=SuperMarketManager
