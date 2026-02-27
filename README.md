@@ -21,3 +21,8 @@ spring.thymeleaf.check-template-location=false
 ```
 
   - kol mara kat executer lcode dkhol n ```http://localhost:8080/``` bach tchof l'execution dcode
+
+## Links 
+- Java 25 : https://download.oracle.com/java/25/archive/jdk-25.0.1_windows-x64_bin.msi
+- PostgreSQL : https://www.postgresql.org/download/
+- Intellij idea: https://www.jetbrains.com/idea/download/?section=windows
