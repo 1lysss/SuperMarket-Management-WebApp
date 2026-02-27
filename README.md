@@ -26,3 +26,4 @@ spring.thymeleaf.check-template-location=false
 - Java 25 : https://download.oracle.com/java/25/archive/jdk-25.0.1_windows-x64_bin.msi
 - PostgreSQL : https://www.postgresql.org/download/
 - Intellij idea: https://www.jetbrains.com/idea/download/?section=windows
+- Spring documentation : https://spring.io/guides/tutorials/rest
