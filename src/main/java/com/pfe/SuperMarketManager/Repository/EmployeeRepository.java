@@ -1,4 +1,8 @@
 package com.pfe.SuperMarketManager.Repository;
 
-public class EmployeeRepository {
+import com.pfe.SuperMarketManager.Model.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
+
 }

@@ -1,18 +1,31 @@
 package com.pfe.SuperMarketManager.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
+@Table(name = "employees") // specify table name in database
 public class Employee {
-    @Id
+
+    public enum Role {
+        ADMIN, STOCK_MANAGER, CASHIER
+    }
+
+    @Id // Indicate primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Indicate auto increment
     private Integer id;
     private String fullName;
-    private String userName;
+    private String username;
     private String password;
-    private String role;
     private String email;
-    private String createdAt;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(updatable = false)
+    private LocalDate createdAt;
 
     public void setId(Integer id) {
         this.id = id;
@@ -30,12 +43,12 @@ public class Employee {
         this.fullName = fullName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -46,14 +59,6 @@ public class Employee {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -62,25 +67,33 @@ public class Employee {
         this.email = email;
     }
 
-    public String getCreatedAt() {
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
     public Employee () {}; // Constructor for JPA...
 
-    public Employee(Integer id, String fullname, String password, String role, String email) {
+    public Employee(Integer id, String fullname, String username, String password, Role role, String email, LocalDate createdAt) {
         this.id = id;
         this.fullName = fullname;
+        this.username = username;
         this.password = password;
         this.role = role;
         this.email = email;
+        this.createdAt = createdAt;
     }
-
-
 }
 
 
