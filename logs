@@ -1,3 +1,4 @@
 [DATE] - [NAME] - [ACTION]
 
-22/02 - Ilyass - Initiate the project
+22/02 - Ilyass - Initiate the project.
+27/02 - Iyass - Added model, controller, repository and service folders. Won't update again until I get models or both models and repository done for each entity.
