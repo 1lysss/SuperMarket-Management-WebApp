@@ -1,12 +1,17 @@
 package com.pfe.SuperMarketManager.Model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.stream.Gatherer;
 
 @Entity
 @Table(name = "sales")
+@Data
+@NoArgsConstructor
+
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,17 +20,4 @@ public class Sale {
 //    private BigDecimal totalPrice;
     private LocalDate saleDate;
 
-    public Sale() {};
-
-    public Sale(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 }

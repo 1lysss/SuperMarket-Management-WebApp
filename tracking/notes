@@ -3,5 +3,21 @@ src/main/java/com/MyApp/
 ├── repository/    → Database access layer
 ├── service/       → Business logic
 ├── controller/    → HTTP endpoints (REST API)
-└── YourApplication.java  → Entry point
+└── Application.java  → Entry point
 ------------------------------------------------------------------------
+Integer type instead of int for identifiers because it defaults to null instead of 0
+
+
+@Column(...)
+puts constraints on a certain column
+
+
+Spring data jpa thingy:
+- Repo abstraction is an interface that extends one of spring data jpa repo interfaces used to reduce boilerplate code needed to implement the DAO tp interact with the data stores
+its used to abstract the data acces layer from business logic, used to perfrom CRUD operations.
+
+- It has 3 Main interfaces:
+    CRUD
+    sorting
+    paging
+==> Main use is interacting with the database (perform operations)
