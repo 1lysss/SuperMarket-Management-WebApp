@@ -3,7 +3,6 @@ package com.pfe.SuperMarketManager.Model;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -20,10 +19,19 @@ public class StockRequest {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private BigDecimal quantityRequested;
     private Status status;
     private LocalDate requestDate;
-    // TODO: product id
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+
 }
+
+
+
+// MANY REQUESTS CAN BE OF THE SAME PRODUCT

@@ -13,11 +13,18 @@ import java.math.BigDecimal;
 
 public class SaleItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-//  private Integer saleId;
-    private Integer productId;
     private BigDecimal quantity;
     private BigDecimal price;
 
+    // Many sale items can have the same product (product bought multiple times)
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;  // links to price? ask Claude
+
+    // Many sale items belong to a single sale for each purchase made
+    @ManyToOne
+    @JoinColumn(name = "sale_id")
+    private Sale sale;
 }

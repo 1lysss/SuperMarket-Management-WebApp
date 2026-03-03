@@ -5,7 +5,7 @@ src/main/java/com/MyApp/
 ├── controller/    → HTTP endpoints (REST API)
 └── Application.java  → Entry point
 ------------------------------------------------------------------------
-Integer type instead of int for identifiers because it defaults to null instead of 0
+Integer type instead of int for ids because it defaults to null instead of 0
 
 
 @Column(...)
@@ -21,3 +21,7 @@ its used to abstract the data acces layer from business logic, used to perfrom C
     sorting
     paging
 ==> Main use is interacting with the database (perform operations)
+
+
+
+=== relationships:

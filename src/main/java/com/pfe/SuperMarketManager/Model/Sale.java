@@ -3,9 +3,9 @@ package com.pfe.SuperMarketManager.Model;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
-import java.util.stream.Gatherer;
+import java.util.List;
+
 
 @Entity
 @Table(name = "sales")
@@ -14,10 +14,15 @@ import java.util.stream.Gatherer;
 
 public class Sale {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-//    private Integer cashier_id;
-//    private BigDecimal totalPrice;
     private LocalDate saleDate;
 
+    // A sale has many sale items
+    @OneToMany(mappedBy = "sale")
+    private List<SaleItem> saleItems;
+
+    @ManyToOne
+    @JoinColumn(name = "cashier_id")
+    private Employee cashier;
 }

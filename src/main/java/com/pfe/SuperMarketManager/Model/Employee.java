@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "employees") // specify table name in database
@@ -39,6 +40,10 @@ public class Employee {
 
     @Column(updatable = false)
     private LocalDate createdAt;
+
+    @OneToMany(mappedBy = "cashier")
+    private List<Sale> sales;
+
 }
 
 
