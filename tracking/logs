@@ -2,4 +2,5 @@
 
 22/02 - Ilyass - Initiate the project.
 27/02 - Iyass - Added model, controller, repository and service folders. Won't update again until I get models or both models and repository done for each entity.
-[01/03] - Ilyass - Added lombok to reduce repetitive code
+01/03 - Ilyass - Added lombok to reduce repetitive code
+03/03 - Ilyass - Done with Models
