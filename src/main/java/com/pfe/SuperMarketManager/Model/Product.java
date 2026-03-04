@@ -24,14 +24,14 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private BigDecimal price;
+    private BigDecimal unitPrice;
 
     @Enumerated(EnumType.STRING)
     private Unit unit;
 
     private LocalDate expiryDate;
     private String name;
-    private float quantity;
+    private BigDecimal quantity;
 
     @ManyToOne
     @JoinColumn(name = "section_id")

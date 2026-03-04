@@ -1,8 +1,10 @@
 package com.pfe.SuperMarketManager.Model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,11 +13,13 @@ import java.util.List;
 @Table(name = "sales")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 
 public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    private BigDecimal totalPrice;
     private LocalDate saleDate;
 
     // A sale has many sale items

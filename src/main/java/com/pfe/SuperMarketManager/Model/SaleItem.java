@@ -16,7 +16,7 @@ public class SaleItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private BigDecimal quantity;
-    private BigDecimal price;
+    private BigDecimal unitPrice;
 
     // Many sale items can have the same product (product bought multiple times)
     @ManyToOne

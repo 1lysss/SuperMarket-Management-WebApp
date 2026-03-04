@@ -26,10 +26,7 @@ public class Employee {
 
     private String fullName;
 
-    @Column(
-            unique = true,
-            nullable = false
-    )
+    @Column(unique = true, nullable = false)
     private String username;
 
     private String password;
