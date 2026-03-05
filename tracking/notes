@@ -23,5 +23,15 @@ its used to abstract the data acces layer from business logic, used to perfrom C
 ==> Main use is interacting with the database (perform operations)
 
 
+=== Flow
+    - Controller → calls → Service → calls → Repository
 
-=== relationships:
+    -Repository — talks to the database directly. Only knows how to fetch/save/delete data. No business logic.
+
+    - Service — contains the business logic. It uses the repository to get data, then     does something with it. It doesn't        implement the repository, it calls it.
+
+    - Controller — receives the HTTP request,   calls the service, sends the result to    the Thymeleaf page.
+
+
+
+  

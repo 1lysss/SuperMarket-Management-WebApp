@@ -1,8 +1,10 @@
 package com.pfe.SuperMarketManager.service;
 
+import com.pfe.SuperMarketManager.Model.Employee;
+import java.util.List;
 
-import org.springframework.stereotype.Service;
+public interface EmployeeService {
+    List<Employee> getAllEmployees();
+    Integer getEmployeeId();
 
-@Service // this acts as a bean
-public class EmployeeService {
 }
