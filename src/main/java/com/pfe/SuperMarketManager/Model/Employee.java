@@ -1,5 +1,6 @@
 package com.pfe.SuperMarketManager.Model;
 
+import com.pfe.SuperMarketManager.Model.Enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,10 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Employee {
-
-    public enum Role {
-        ADMIN, STOCK_MANAGER, CASHIER
-    }
 
     @Id // Indicate primary key
     @GeneratedValue(strategy = GenerationType.AUTO) // Indicate auto increment

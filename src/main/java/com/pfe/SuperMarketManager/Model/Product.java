@@ -1,5 +1,6 @@
 package com.pfe.SuperMarketManager.Model;
 
+import com.pfe.SuperMarketManager.Model.Enums.Unit;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,13 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 
 public class Product {
-
-    public enum Unit {
-        PACK,
-        KG,
-        LITER,
-        ITEM
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,29 +1,30 @@
 package com.pfe.SuperMarketManager.controller;
 
 import com.pfe.SuperMarketManager.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-/* Create method handler for some page "page.html" to display list of employees */
 
 
-@RestController
 
+@Controller
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService employeeService;
+    final private EmployeeService employeeService;
 
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
-    // Show list of employees
-    //@GetMapping("/")
+    @GetMapping("/")
     public String viewHomePage(Model model){
         // Assign retval to use in thymeleaf
-        model.addAttribute("getAllEmployees", employeeService.getAllEmployees());
-        return "index";  // html page
+        model.addAttribute("getAllEmployees",      employeeService.getAllEmployees());
+        model.addAttribute("getAdminCount",        employeeService.getAdminCount());
+        model.addAttribute("getStockManagerCount", employeeService.getStockManagerCount());
+        model.addAttribute("getCashierCount",      employeeService.getCashierCount());
+
+        return "index";
     }
 }
 

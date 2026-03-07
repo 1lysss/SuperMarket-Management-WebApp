@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface EmployeeService {
     List<Employee> getAllEmployees();
-    Integer getEmployeeId();
-
+    long getAdminCount();
+    long getStockManagerCount();
+    long getCashierCount();
 }
