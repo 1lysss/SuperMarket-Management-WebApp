@@ -4,3 +4,4 @@
 27/02 - Iyass - Added model, controller, repository and service folders.
 01/03 - Ilyass - Added lombok to reduce repetitive code
 03/03 - Ilyass - Done with Models
+10/03 - Ilyass - Implemented CRUD for employees
