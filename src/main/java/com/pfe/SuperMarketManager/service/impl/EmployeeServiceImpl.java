@@ -2,16 +2,14 @@ package com.pfe.SuperMarketManager.service.impl;
 
 import com.pfe.SuperMarketManager.Model.Employee;
 import com.pfe.SuperMarketManager.Model.Enums.Role;
-import com.pfe.SuperMarketManager.Model.Sale;
 import com.pfe.SuperMarketManager.Repository.EmployeeRepository;
 import com.pfe.SuperMarketManager.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 
@@ -20,11 +18,39 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
+    }
+
+    @Override
+    public Employee getEmployeeById(Integer id) {
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+    }
+
+
+    @Override
+    public void saveEmployee(Employee employee) {
+        if (employee.getPassword() != null && !employee.getPassword().isEmpty()) {
+            employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+        }
+        employee.setPassword(passwordEncoder.encode(employee.getPassword()));  // encrypt password
+        employee.setCreatedAt(LocalDate.now());
+        employeeRepository.save(employee);
+    }
+
+    @Override
+    public void deleteEmployee(Integer id) {
+        employeeRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateEmployee(Employee employee) {
+
     }
 
     @Override

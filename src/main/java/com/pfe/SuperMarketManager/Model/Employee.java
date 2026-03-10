@@ -21,6 +21,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO) // Indicate auto increment
     private Integer id;
 
+    @Column(nullable = false)
     private String fullName;
 
     @Column(unique = true, nullable = false)
@@ -29,6 +30,7 @@ public class Employee {
     private String password;
     private String email;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 

@@ -1,7 +1,5 @@
 package com.pfe.SuperMarketManager;
 
-import com.pfe.SuperMarketManager.Model.Enums.Unit;
-import com.pfe.SuperMarketManager.Model.Product;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
