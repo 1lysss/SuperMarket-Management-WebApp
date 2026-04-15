@@ -13,7 +13,7 @@ puts constraints on a certain column
 
 
 Spring data jpa thingy:
-- Repo abstraction is an interface that extends one of spring data jpa repo interfaces used to reduce boilerplate code needed to implement the DAO tp interact with the data stores
+- Repo abstraction is an interface that extends one of spring data jpa repo interfaces used to reduce boilerplate code needed to implement the DAO to interact with the data stores
 its used to abstract the data acces layer from business logic, used to perfrom CRUD operations.
 
 - It has 3 Main interfaces:
@@ -33,5 +33,37 @@ its used to abstract the data acces layer from business logic, used to perfrom C
     - Controller — receives the HTTP request,   calls the service, sends the result to    the Thymeleaf page.
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-Problems to fix later (technically bad):
+    * Employee should have two funcs, one for creating an employee, and one for updating it, i mixed both in one function which is bad/inefficient.
 
   
