@@ -14,7 +14,7 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
     }
 
-    public long getProductCount(Product product) {
+    public long getProductCount() {
         return productRepository.count();
     }
 

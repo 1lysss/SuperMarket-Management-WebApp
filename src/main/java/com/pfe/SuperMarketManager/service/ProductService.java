@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    long getProductCount(Product product);  // ret getQuantity
+    long getProductCount();  // ret getQuantity
 
     void assignToSection(Product product, Section section);
 
