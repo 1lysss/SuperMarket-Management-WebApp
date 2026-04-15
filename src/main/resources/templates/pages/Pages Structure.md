@@ -7,5 +7,5 @@ Admin Pages:
     Supply Requests
 
 Stock Manager:
-    Sections page *default page* -> Same page as admins section page
+    Sections page *default page* -> `Same page as admins section page`
 
