@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findBySection(Section section);
-    //long countProductsBySection(Section section);
     Product findById(Product product);
     Product findByName(Product product);
     long countBySection(Section section);

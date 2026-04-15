@@ -16,6 +16,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     Optional<Employee> findById(int id);
     long countByRole(Role role);
     void deleteById(@NonNull Integer id);
-    @NullMarked List<Employee> findAll();
-    long countAllProducts();
+    long count();
 }
