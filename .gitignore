@@ -33,4 +33,4 @@ build/
 .vscode/
 
 # PostgreSQL password
-application.properties
+src/main/resources/application.properties
