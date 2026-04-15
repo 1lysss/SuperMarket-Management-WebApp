@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -36,6 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (employee.getPassword() != null ) {
             employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         }
+        employee.setCreatedAt(LocalDate.now());
         employeeRepository.save(employee);
     }
 
