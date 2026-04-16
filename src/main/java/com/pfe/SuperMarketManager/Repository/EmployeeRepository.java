@@ -13,8 +13,5 @@ import java.util.Optional;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-    Optional<Employee> findById(int id);
     long countByRole(Role role);
-    void deleteById(@NonNull Integer id);
-    long count();
 }

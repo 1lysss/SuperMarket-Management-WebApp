@@ -4,15 +4,17 @@ import com.pfe.SuperMarketManager.Model.Product;
 import com.pfe.SuperMarketManager.Model.Section;
 import com.pfe.SuperMarketManager.Repository.ProductRepository;
 import com.pfe.SuperMarketManager.service.ProductService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
+@Service
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    public ProductServiceImpl(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     public long getProductCount() {
         return productRepository.count();

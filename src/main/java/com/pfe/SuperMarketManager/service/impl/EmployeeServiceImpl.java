@@ -29,7 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee getEmployeeById(Integer id) {
         return employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+                .orElseThrow(() -> new RuntimeException("Employee not found getEmployeeById()"));
     }
 
     @Override
@@ -48,7 +48,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmployee(Employee employee) {
-
+        Employee existingEmployee = employeeRepository.findById(employee.getId())
+                .orElseThrow(()-> new RuntimeException("Employee not found updateEmployee()"));
+        // TODO : Finish updateEmployee()
     }
 
     @Override
