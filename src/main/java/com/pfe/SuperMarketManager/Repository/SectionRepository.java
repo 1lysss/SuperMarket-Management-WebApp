@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SectionRepository extends JpaRepository<Section, Integer> {
     Section findByName(String name);
-    // only this one for now
 }

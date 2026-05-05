@@ -8,4 +8,10 @@ public interface SectionService {
     public List<Section> getAllSections();
     public long getSectionCount();
 
+    // CRUD
+
+    public void addSection(Section section);
+    public void editSection(Section section);
+    public void deleteSection(Section section);
+    public Section getSection(String sectionName);
 }
