@@ -98,6 +98,7 @@ body{
 }
 
 .page-header h1{
+    font-family: 'Space Grotesk', sans-serif;
     font-size:32px;
     font-weight:800;
     color:#0f172a;

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sections</title>
+</head>
+<body>
+
+<h1>Sections</h1>
+
+<a th:href="@{/sections/add}">+ Add Section</a>
+
+<br><br>
+
+<table border="1" cellpadding="8">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="section : ${showSections}">
+            <td th:text="${section.id}"></td>
+            <td th:text="${section.name}"></td>
+            <td th:text="${section.description}"></td>
+            <!-- <td th:text="${section.products != null ? section.products.size() : 0}"></td> -->
+            <td>
+                <a th:href="@{/sections/edit/{id}(id=${section.id})}">Edit</a>
+                &nbsp;
+                <form th:action="@{/sections/delete/{id}(id=${section.id})}"
+                      method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

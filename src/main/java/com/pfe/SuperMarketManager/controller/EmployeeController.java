@@ -16,9 +16,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-
     /* GET MAPPINGS */
-
 
     @GetMapping("/")
     public String showDashboard(Model model){
@@ -43,25 +41,19 @@ public class EmployeeController {
 
     @GetMapping("/admin/logs")
     public String showLogs(Model model) {
-
         // TODO
-
         return "pages/admin/logs";
     }
 
     @GetMapping("/admin/sections")
     public String showSections(Model model) {
-
         // TODO
-
         return "pages/admin/sections";
     }
 
     @GetMapping("/admin/supplyRequests")
     public String showSupplyRequests(Model model) {
-
         // TODO
-
         return "";
     }
 
