@@ -1,83 +1,180 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <title>Add Employee</title>
+    <style>
+        body{
+            margin:0;
+            font-family:'Segoe UI', Arial, sans-serif;
+            background:linear-gradient(135deg,#eef2ff,#f8fafc);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            min-height:100vh;
+        }
+        .container{
+            width:100%;
+            display:flex;
+            justify-content:center;
+        }
+        form{
+            background:white;
+            padding:30px 35px;
+            border-radius:16px;
+            box-shadow:0 12px 30px rgba(15,23,42,0.12);
+            width:420px;
+        }
+        h1{
+            text-align:center;
+            font-size:30px;
+            font-weight:800;
+            color:#0f172a;
+            margin-bottom:20px;
+        }
+        label{
+            font-weight:600;
+            color:#1e293b;
+            display:block;
+            margin-bottom:6px;
+        }
+        input,
+        select{
+            width:100%;
+            padding:10px 12px;
+            border:1px solid #e2e8f0;
+            border-radius:10px;
+            outline:none;
+            font-size:14px;
+            transition:0.2s;
+            background:#f8fafc;
+            margin-bottom:12px;
+            box-sizing:border-box;
+        }
+        input:focus,
+        select:focus{
+            border-color:#6366f1;
+            box-shadow:0 0 0 3px rgba(99,102,241,0.2);
+            background:white;
+        }
+        button{
+            padding:10px 14px;
+            border:none;
+            border-radius:10px;
+            font-weight:600;
+            cursor:pointer;
+            transition:0.2s;
+            margin-right:8px;
+        }
+        button[type="submit"]{
+            background:linear-gradient(135deg,#7065fa,#2c13cd);
+            color:white;
+            box-shadow:0 8px 20px rgba(99,102,241,0.3);
+        }
+        button[type="submit"]:hover{
+            transform:translateY(-2px);
+            background:linear-gradient(135deg,#4f46e5,#2563eb);
+        }
+        button[type="reset"]{
+            background:#e2e8f0;
+            color:#0f172a;
+        }
+        button[type="reset"]:hover{
+            background:#cbd5e1;
+        }
+        #message{
+            font-size:13px;
+            margin-top:5px;
+            font-weight:500;
+        }
+        @media (max-width:500px){
+            form{
+                width:90%;
+                padding:25px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
-<h1 th:text="${employee.id != null} ? 'Edit Employee' : 'Add Employee'"></h1>
-
-<form th:action="${employee.id != null} ? @{/admin/editEmployee/{id}(id=${employee.id})} : @{/admin/addEmployee}"
-      th:object="${employee}" method="post">
-
-    <input type="hidden" th:field="*{id}">
-
-    <div>
-        <label>Full Name</label>
-        <input type="text" th:field="*{fullName}" placeholder="Full Name" autocomplete="off" required>
-    </div>
-    <br>
-    <div>
-        <label>Email</label>
-        <input type="email" th:field="*{email}" placeholder="Email" autocomplete="off" required>
-    </div>
-    <br>
-    <div>
-        <label>Username</label>
-        <input type="text" th:field="*{username}" placeholder="Username" autocomplete="off" required>
-    </div>
-    <br>
-    <div>
-        <label>Password</label>
-        <input type="password" th:field="*{password}" placeholder="Password" autocomplete="new-password">
-    </div>
-    <br>
-    <div>
-        <label>Confirm Password</label>
-        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" autocomplete="new-password">
-    </div>
-    <p id="message"></p>
-    <br>
-    <div>
-        <label>Role</label>
-        <select th:field="*{role}" required>
-            <option value="">Select role</option>
-            <option value="ADMIN">Admin</option>
-            <option value="STOCK_MANAGER">Stock Manager</option>
-            <option value="CASHIER">Cashier</option>
-        </select>
-    </div>
-    <br><br>
-    <button type="submit" th:text="${employee.id != null} ? 'Update Employee' : 'Add Employee'"></button>
-    <button type="reset">Reset</button>
-</form>
-
+<div class="container">
+    <form th:action="${employee.id != null} ? @{/admin/editEmployee/{id}(id=${employee.id})} : @{/admin/addEmployee}"
+          th:object="${employee}" method="post">
+        <h1 th:text="${employee.id != null} ? 'Edit Employee' : 'Add Employee'"></h1>
+        <input type="hidden" th:field="*{id}">
+        <div>
+            <label>Full Name</label>
+            <input type="text"
+                   th:field="*{fullName}"
+                   placeholder="Full Name"
+                   autocomplete="off"
+                   required>
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="email"
+                   th:field="*{email}"
+                   placeholder="Email"
+                   autocomplete="off"
+                   required>
+        </div>
+        <div>
+            <label>Username</label>
+            <input type="text"
+                   th:field="*{username}"
+                   placeholder="Username"
+                   autocomplete="off"
+                   required>
+        </div>
+        <div>
+            <label>Password</label>
+            <input type="password"
+                   th:field="*{password}"
+                   id="password"
+                   placeholder="Password"
+                   autocomplete="new-password">
+        </div>
+        <div>
+            <label>Confirm Password</label>
+            <input type="password"
+                   name="confirmPassword"
+                   id="confirmPassword"
+                   placeholder="Confirm Password"
+                   autocomplete="new-password">
+        </div>
+        <p id="message"></p>
+        <div>
+            <label>Role</label>
+            <select th:field="*{role}" required>
+                <option value="">Select role</option>
+                <option value="ADMIN">Admin</option>
+                <option value="STOCK_MANAGER">Stock Manager</option>
+                <option value="CASHIER">Cashier</option>
+            </select>
+        </div>
+        <br>
+        <button type="submit" th:text="${employee.id != null} ? 'Update Employee' : 'Add Employee'">Add</button>
+        <button type="reset">Reset</button>
+    </form>
+</div>
 <script>
-const password = document.getElementById("password");
-const confirmPassword = document.getElementById("confirmPassword");
-const message = document.getElementById("message");
-
-function checkPasswords() {
-    if (confirmPassword.value === "") {
-        message.textContent = "";
-        return;
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("confirmPassword");
+    const message = document.getElementById("message");
+    function checkPasswords() {
+        if (confirmPassword.value === "") {
+            message.textContent = "";
+            return;
+        }
+        if (password.value === confirmPassword.value) {
+            message.textContent = "Passwords match";
+            message.style.color = "green";
+        } else {
+            message.textContent = "Passwords do not match!";
+            message.style.color = "red";
+        }
     }
-
-    if (password.value === confirmPassword.value) {
-        message.textContent = "Passwords match";
-        message.style.color = "green";
-    } else {
-        message.textContent = "Passwords do not match!";
-        message.style.color = "red";
-    }
-}
-
-password.addEventListener("input", checkPasswords);
-confirmPassword.addEventListener("input", checkPasswords);
+    password.addEventListener("input", checkPasswords);
+    confirmPassword.addEventListener("input", checkPasswords);
 </script>
-
 </body>
 </html>

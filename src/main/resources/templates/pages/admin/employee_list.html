@@ -129,9 +129,7 @@
             width:260px;
             box-shadow:0 6px 18px rgba(0,0,0,0.06);
         }
-        .search-box i{
-            color: #0c0c0c  !important;
-        }
+
         .search-box input{
             border:none;
             outline:none;
@@ -170,18 +168,18 @@
             background:#eef2ff;
         }
         .btn-edit{
-            background: #65ff00 !important;
+            background: #65ff5a !important;
             border:none !important;
         }
         .btn-edit:hover{
-            background: #00e2ff !important;
+            background: #4ac83f !important;
         }
         .btn-delete{
-            background: #ff0000 !important;
+            background: #fd4137 !important;
             border:none !important;
         }
         .btn-delete:hover{
-            background: #00d1ec !important;
+            background: #e30d00 !important;
         }
         @media (max-width:768px){
             .page-header{
@@ -208,7 +206,7 @@
 <div id="sidebar" class="sidebar">
     <h2>Supermarket</h2>
     <a th:href="@{/}"><i class="fas fa-house"></i> Dashboard</a>
-    <a th:href="@{/admin/employees}" class="active"><i class="fas fa-users"></i> Employees</a>
+    <a th:href="@{/admin/employee_list}" class="active"><i class="fas fa-users"></i> Employees</a>
     <a th:href="@{/admin/sections}"><i class="fas fa-layer-group"></i> Sections</a>
     <a th:href="@{/admin/products}"><i class="fas fa-box"></i> Products</a>
     <a th:href="@{/admin/sales}"><i class="fas fa-chart-line"></i> Sales</a>
