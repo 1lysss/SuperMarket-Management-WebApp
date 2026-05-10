@@ -1,6 +1,6 @@
 body{
     margin:0;
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     background: linear-gradient(135deg,#eef2ff,#f8fafc);
 }
 .menu{
@@ -97,6 +97,7 @@ body{
     flex-wrap:wrap;
 }
 .page-header h1{
+    font-family: 'Space Grotesk', sans-serif;
     font-size:32px;
     font-weight:800;
     color:#0f172a;
@@ -157,18 +158,20 @@ body{
     background:#eef2ff;
 }
 .btn-edit{
-    background: #65ff5a !important;
-    border:none !important;
+    background: #3b82f6 !important; /* soft blue */
+    border: none !important;
+    color: white;
 }
 .btn-edit:hover{
-    background: #4ac83f !important;
+    background: #2563eb !important;
 }
 .btn-delete{
-    background: #fd4137 !important;
-    border:none !important;
+    background: #ef4444 !important; /* modern red */
+    border: none !important;
+    color: white;
 }
 .btn-delete:hover{
-    background: #e30d00 !important;
+    background: #dc2626 !important;
 }
 @media (max-width:768px){
     .page-header{
