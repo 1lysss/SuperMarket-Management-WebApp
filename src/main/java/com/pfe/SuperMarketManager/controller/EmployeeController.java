@@ -41,14 +41,6 @@ public class EmployeeController {
         return "pages/admin/employee_list";
     }
 
-
-    @GetMapping("/admin/deleteEmployee/{id}")
-    public String deleteEmployee(@PathVariable Integer id) {
-        employeeService.deleteEmployee(id);
-        return "redirect:/admin/employee_list";
-    }
-
-
     @GetMapping("/admin/logs")
     public String showLogs(Model model) {
 
@@ -84,20 +76,27 @@ public class EmployeeController {
 
 
     /* POST MAPPINGS */
+    // !READ: return should be a controller route not HTML file path!!!
 
     @PostMapping("/admin/addEmployee")
     public String saveEmployee(@ModelAttribute("employee") Employee employee,@RequestParam("confirmPassword") String confirmPassword) {
 
         if (!employee.getPassword().equals(confirmPassword)) return "pages/admin/employee_form";
         else    employeeService.saveEmployee(employee);
-        return "redirect:/admin/employee_list";  // should be a controller route not HTML file path!!!
+        return "redirect:/admin/employee_list";
     }
 
     @PostMapping("/admin/editEmployee/{id}")
     public String updateEmployee(@PathVariable Integer id, @ModelAttribute("employee") Employee employee) {
         employee.setId(id);
         employeeService.saveEmployee(employee);
-        return "redirect:/";
+        return "redirect:/admin/employee_list";
+    }
+
+    @PostMapping("/admin/deleteEmployee/{id}")
+    public String deleteEmployee(@PathVariable Integer id) {
+        employeeService.deleteEmployee(id);
+        return "redirect:/admin/employee_list";
     }
 }
 
