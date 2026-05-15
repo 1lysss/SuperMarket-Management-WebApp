@@ -131,7 +131,7 @@
         row.style.display = match ? '' : 'none';
         if (match) {
           cells.forEach(cell => {
-            if (cell.querySelector('a, button, form')) return;
+            if (cell.querySelector('a, button, form, span')) return;
             cell.innerHTML = cell.dataset.original.replace(
               new RegExp(`(${q})`, 'gi'),
               '<mark class="bg-cyan-100 text-deep rounded px-0.5">$1</mark>'
