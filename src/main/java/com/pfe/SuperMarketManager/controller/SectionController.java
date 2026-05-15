@@ -50,7 +50,7 @@ public class SectionController {
         existingSection.setProducts(section.getProducts());
 
         sectionService.updateSection(section);
-        return "pages/section/sections";
+        return "redirect:/sections";
     }
 
 

@@ -16,10 +16,6 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
-    public long getProductCount() {
-        return productRepository.count();
-    }
-
     @Override
     public void assignToSection(Product product, Section section) {
         product.setSection(section);
@@ -36,28 +32,23 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void removeProduct(Product product) {
-        productRepository.delete(product);
+    public void removeProduct(Integer id) {
+        productRepository.deleteById(id);
     }
 
     @Override
-    public void editProduct(Integer id, Product product) {
-        Product existingProduct= productRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Product not found"));
-        existingProduct.setName(product.getName());
-        existingProduct.setSection(product.getSection());
-        existingProduct.setUnitPrice(product.getUnitPrice());
-        existingProduct.setExpiryDate(product.getExpiryDate());
-        existingProduct.setSupplier(product.getSupplier());
-        existingProduct.setSaleItems(product.getSaleItems());
-        existingProduct.setStockRequests(product.getStockRequests());
-
-        productRepository.save(existingProduct);
+    public void updateProduct(Product product) {
+        productRepository.save(product);
     }
 
     @Override
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public Optional<Product> getProductById(Integer id) {
+        return productRepository.findById(id);
     }
 
 

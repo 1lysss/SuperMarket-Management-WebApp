@@ -21,10 +21,10 @@ public class SectionServiceImpl implements SectionService {
         return sectionRepository.findAll();
     }
 
-//    @Override
-//    public long getSectionCount() {
-//        return sectionRepository.count();
-//    }
+    @Override
+    public long getSectionCount() {
+        return sectionRepository.count();
+    }
 
     @Override
     public void addSection(Section section) {

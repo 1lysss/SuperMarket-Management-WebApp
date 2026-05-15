@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface SectionService {
     List<Section> getAllSections();
-//    long getSectionCount();
+    long getSectionCount();
 
     // CRUD
 

@@ -1,9 +1,14 @@
-hihi==> List of tasks <==
+==> List of tasks <==
 
 CRUD operations:
     Employees     [DONE]
     Product       [PENDING]
     Sale          [PENDING]
-    Section       [PENDING]
+    Section       [DONE]
     Stock request [PENDING]
     Supplier      [PENDING]
+
+
+
+today:
+    link products with sections
