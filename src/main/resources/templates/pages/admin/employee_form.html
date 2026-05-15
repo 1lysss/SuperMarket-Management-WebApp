@@ -1,90 +1,205 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Add Employee</title>
-    <link rel="stylesheet" href="/css/employee_form.css">
-</head>
-<body>
-<div class="container">
-    <form th:action="${employee.id != null} ? @{/admin/editEmployee/{id}(id=${employee.id})} : @{/admin/addEmployee}"
-          th:object="${employee}" method="post">
-        <h1 th:text="${employee.id != null} ? 'Edit Employee' : 'Add Employee'"></h1>
-        <input type="hidden" th:field="*{id}">
-        <div>
-            <label>Full Name</label>
-            <input type="text"
-                   th:field="*{fullName}"
-                   placeholder="Full Name"
-                   autocomplete="off"
-                   required>
-        </div>
-        <div>
-            <label>Email</label>
-            <input type="email"
-                   th:field="*{email}"
-                   placeholder="Email"
-                   autocomplete="off"
-                   required>
-        </div>
-        <div>
-            <label>Username</label>
-            <input type="text"
-                   th:field="*{username}"
-                   placeholder="Username"
-                   autocomplete="off"
-                   required>
-        </div>
-        <div>
-            <label>Password</label>
-            <input type="password"
-                   th:field="*{password}"
-                   id="password"
-                   placeholder="Password"
-                   autocomplete="new-password">
-        </div>
-        <div>
-            <label>Confirm Password</label>
-            <input type="password"
-                   name="confirmPassword"
-                   id="confirmPassword"
-                   placeholder="Confirm Password"
-                   autocomplete="new-password">
-        </div>
-        <p id="message"></p>
-        <div>
-            <label>Role</label>
-            <select th:field="*{role}" required>
-                <option value="">Select role</option>
-                <option value="ADMIN">Admin</option>
-                <option value="STOCK_MANAGER">Stock Manager</option>
-                <option value="CASHIER">Cashier</option>
-            </select>
-        </div>
-        <br>
-        <button type="submit" th:text="${employee.id != null} ? 'Update Employee' : 'Add Employee'">Add</button>
-        <button type="reset">Reset</button>
-    </form>
-</div>
-<script>
-    const password = document.getElementById("password");
-    const confirmPassword = document.getElementById("confirmPassword");
-    const message = document.getElementById("message");
-    function checkPasswords() {
-        if (confirmPassword.value === "") {
-            message.textContent = "";
-            return;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title th:text="${employee.id != null} ? 'Edit Employee' : 'Add Employee'">Employee Form</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            deep:    "#09637E",
+            primary: "#088395",
+            mid:     "#7AB2B2",
+            light:   "#EBF4F6",
+            border:  "#c4dde3",
+            tx:      "#0f2e38",
+            muted:   "#4a7a86",
+          },
+          fontFamily: {
+            title: ["'Space Grotesk'", "sans-serif"],
+            body:  ["'DM Sans'",       "sans-serif"],
+          },
         }
-        if (password.value === confirmPassword.value) {
-            message.textContent = "Passwords match";
-            message.style.color = "green";
-        } else {
-            message.textContent = "Passwords do not match!";
-            message.style.color = "red";
-        }
+      }
     }
-    password.addEventListener("input", checkPasswords);
-    confirmPassword.addEventListener("input", checkPasswords);
-</script>
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
+</head>
+<body class="flex min-h-screen bg-light font-body text-tx">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">🛒 Supermarket</div>
+    <a th:href="@{/}"><i class="fas fa-house"></i> Dashboard</a>
+    <a th:href="@{/admin/employee_list}" class="active"><i class="fas fa-users"></i> Employees</a>
+    <a th:href="@{/sections/}"><i class="fas fa-layer-group"></i> Sections</a>
+    <a th:href="@{/products/}"><i class="fas fa-box"></i> Products</a>
+    <a th:href="@{/admin/sales}"><i class="fas fa-chart-line"></i> Sales</a>
+    <a th:href="@{/admin/stockRequests}"><i class="fas fa-truck"></i> Stock</a>
+    <a th:href="@{/admin/logs}"><i class="fas fa-clipboard-list"></i> Logs</a>
+    <a th:href="@{/admin/profile}"><i class="fas fa-user-cog"></i> Profile</a>
+    <a th:href="@{/logout}"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </aside>
+
+  <!-- Main -->
+  <div class="flex-1 p-9">
+
+    <!-- Breadcrumb -->
+    <div class="flex items-center gap-2 mb-7">
+      <a th:href="@{/admin/employee_list}"
+         class="text-sm text-muted hover:text-deep transition-colors duration-150 no-underline">
+        <i class="fas fa-arrow-left mr-1"></i> Employees
+      </a>
+      <span class="text-border text-sm">/</span>
+      <h1 class="font-title font-bold text-2xl text-deep m-0"
+          th:text="${employee.id != null} ? 'Edit Employee' : 'Add Employee'">
+        Add Employee
+      </h1>
+    </div>
+
+    <!-- Form card -->
+    <div class="bg-white border border-border rounded-xl p-8 max-w-xl">
+
+      <!-- ADD FORM -->
+      <form th:if="${employee.id == null}"
+            th:action="@{/admin/addEmployee}"
+            th:object="${employee}"
+            method="post"
+            id="employeeForm">
+
+        <div class="grid grid-cols-2 gap-x-4">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-deep mb-1">Username</label>
+            <input type="text" th:field="*{username}" placeholder="e.g. jdoe"
+                   class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 placeholder-mid" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-deep mb-1">Full Name</label>
+            <input type="text" th:field="*{fullName}" placeholder="e.g. John Doe"
+                   class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 placeholder-mid" required />
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-deep mb-1">Email</label>
+          <input type="email" th:field="*{email}" placeholder="e.g. john@example.com"
+                 class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 placeholder-mid" required />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-deep mb-1">Role</label>
+          <select th:field="*{role}"
+                  class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 bg-white" required>
+            <option value="">Select a role…</option>
+            <option value="ADMIN">Admin</option>
+            <option value="STOCK_MANAGER">Stock Manager</option>
+            <option value="CASHIER">Cashier</option>
+          </select>
+        </div>
+
+        <hr class="border-border my-5" />
+
+        <div class="grid grid-cols-2 gap-x-4">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-deep mb-1">Password</label>
+            <input type="password" th:field="*{password}" placeholder="Enter password"
+                   class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 placeholder-mid" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-deep mb-1">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Repeat password"
+                   class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 placeholder-mid" required />
+            <p id="passwordError" class="text-xs text-red-600 mt-1 hidden">Passwords do not match.</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 mt-2">
+          <button type="submit"
+                  class="text-sm font-medium bg-primary hover:bg-deep text-white px-5 py-2 rounded-lg transition-colors duration-150 cursor-pointer border-0">
+            Save Employee
+          </button>
+          <a th:href="@{/admin/employee_list}"
+             class="text-sm text-muted border border-border rounded-lg px-4 py-2 hover:border-mid hover:text-deep transition-colors duration-150 no-underline">
+            Cancel
+          </a>
+        </div>
+
+      </form>
+
+      <!-- EDIT FORM -->
+      <form th:if="${employee.id != null}"
+            th:action="@{/admin/editEmployee/{id}(id=${employee.id})}"
+            th:object="${employee}"
+            method="post">
+
+        <div class="grid grid-cols-2 gap-x-4">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-deep mb-1">Username</label>
+            <input type="text" th:field="*{username}"
+                   class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-deep mb-1">Full Name</label>
+            <input type="text" th:field="*{fullName}"
+                   class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10" required />
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-deep mb-1">Email</label>
+          <input type="email" th:field="*{email}"
+                 class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10" required />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-deep mb-1">Role</label>
+          <select th:field="*{role}"
+                  class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 bg-white" required>
+            <option value="">Select a role…</option>
+            <option value="ADMIN">Admin</option>
+            <option value="STOCK_MANAGER">Stock Manager</option>
+            <option value="CASHIER">Cashier</option>
+          </select>
+        </div>
+
+        <div class="flex items-center gap-3 mt-2">
+          <button type="submit"
+                  class="text-sm font-medium bg-primary hover:bg-deep text-white px-5 py-2 rounded-lg transition-colors duration-150 cursor-pointer border-0">
+            Update Employee
+          </button>
+          <a th:href="@{/admin/employee_list}"
+             class="text-sm text-muted border border-border rounded-lg px-4 py-2 hover:border-mid hover:text-deep transition-colors duration-150 no-underline">
+            Cancel
+          </a>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('employeeForm');
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        const pw  = document.getElementById('password').value;
+        const cpw = document.getElementById('confirmPassword').value;
+        const err = document.getElementById('passwordError');
+        if (pw !== cpw) {
+          e.preventDefault();
+          err.classList.remove('hidden');
+        } else {
+          err.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+
 </body>
 </html>
