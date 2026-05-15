@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Section Form</title>
+</head>
+<body>
+
+<h1 th:text="${section.id != null} ? 'Edit Section' : 'Add Section'"></h1>
+
+<form th:action="${section.id != null} ? @{/sections/edit/{id}(id=${section.id})} : @{/sections/add}"
+      th:object="${section}"
+      method="post">
+
+    <label>Name:</label>
+    <input type="text" th:field="*{name}">
+    <br><br>
+
+    <label>Description:</label>
+    <input type="text" th:field="*{description}">
+    <br><br>
+
+    <button type="submit" th:text="${section.id != null} ? 'Save' : 'Add'"></button>
+    <a th:href="@{/sections/}">Cancel</a>
+
+</form>
+
+</body>
+</html>
