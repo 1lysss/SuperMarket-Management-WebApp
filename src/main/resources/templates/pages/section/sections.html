@@ -70,109 +70,90 @@
 
         </div>
     </div>
-    <!--
-remove from her comment to see how its look then delete it:)
+
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+<!--
 
-        <div  th:each="section : ${sections}" class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
-            <img th:src="@{/images/VEG4.jpg}"
+        <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
+            <img src="/images/VEG4.jpg"
                  class="w-[100px] h-[100px] rounded-xl object-cover">
 
             <div>
                 <h2 class="font-bold text-lg">Fruits & Vegetables</h2>
+                <p class="text-gray-500 text-sm">Fresh fruits and vegetables every day</p>
+                <p class="text-green-600 font-bold">25 products</p>
 
-                <p class="text-gray-500 text-sm">
-                    Fresh fruits and vegetables every day
-                </p>
-
-                <p class="text-green-600 font-bold">
-                    25 products
-                </p>
-
-                <a th:href="@{/admin/editSection/{id}(id=${section.id})}"
-                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
+                <a href="#"
+                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm">
                     Manage
                 </a>
             </div>
         </div>
 
-        <div  th:each="section : ${sections}" class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
-            <img th:src="@{/images/FISH4.jpg}" class="w-[100px] h-[100px] rounded-xl object-cover">
+
+        <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
+            <img src="/images/FISH4.jpg"
+                 class="w-[100px] h-[100px] rounded-xl object-cover">
 
             <div>
                 <h2 class="font-bold text-lg">Fish & Meat</h2>
+                <p class="text-gray-500 text-sm">Fresh fish, chicken and meat products</p>
+                <p class="text-green-600 font-bold">18 products</p>
 
-                <p class="text-gray-500 text-sm">
-                    Fresh fish, chicken and meat products
-                </p>
-
-                <p class="text-green-600 font-bold">
-                    18 products
-                </p>
-                <a th:href="@{/admin/editSection/{id}(id=${section.id})}" class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
+                <a href="#"
+                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm">
                     Manage
                 </a>
             </div>
         </div>
 
 
-        <div  th:each="section : ${sections}" class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
-            <img th:src="@{/images/DRINK4.jpg}" class="w-[100px] h-[100px] rounded-xl object-cover">
+        <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
+            <img src="/images/DRINK4.jpg"
+                 class="w-[100px] h-[100px] rounded-xl object-cover">
 
             <div>
                 <h2 class="font-bold text-lg">Drinks</h2>
+                <p class="text-gray-500 text-sm">Soda, juices and beverages</p>
+                <p class="text-green-600 font-bold">40 products</p>
 
-                <p class="text-gray-500 text-sm">
-                    Soda, juices and beverages
-                </p>
-
-                <p class="text-green-600 font-bold">
-                    40 products
-                </p>
-                <a th:href="@{/admin/editSection/{id}(id=${section.id})}" class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
+                <a href="#"
+                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm">
                     Manage
                 </a>
             </div>
         </div>
 
 
-        <div  th:each="section : ${sections}" class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
-            <img th:src="@{/images/CHOC4.jpg}" class="w-[100px] h-[100px] rounded-xl object-cover">
+        <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
+            <img src="/images/CHOC4.jpg"
+                 class="w-[100px] h-[100px] rounded-xl object-cover">
 
             <div>
                 <h2 class="font-bold text-lg">Chocolate & Biscuits</h2>
+                <p class="text-gray-500 text-sm">Chocolates, biscuits and sweet snacks</p>
+                <p class="text-green-600 font-bold">22 products</p>
 
-                <p class="text-gray-500 text-sm">
-                    Chocolates, biscuits and sweet snacks
-                </p>
-
-                <p class="text-green-600 font-bold">
-                    22 products
-                </p>
-
-                <a th:href="@{/admin/editSection/{id}(id=${section.id})}" class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
+                <a href="#"
+                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm">
                     Manage
                 </a>
             </div>
         </div>
 
 
-        <div  th:each="section : ${sections}" class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
-            <img th:src="@{/images/MILK4.jpg}" class="w-[100px] h-[100px] rounded-xl object-cover">
+        <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
+            <img src="/images/MILK4.jpg"
+                 class="w-[100px] h-[100px] rounded-xl object-cover">
 
             <div>
                 <h2 class="font-bold text-lg">Milk & Cheese</h2>
+                <p class="text-gray-500 text-sm">Milk, butter, cheese and dairy products</p>
+                <p class="text-green-600 font-bold">16 products</p>
 
-                <p class="text-gray-500 text-sm">
-                    Milk, butter, cheese and dairy products
-                </p>
-
-                <p class="text-green-600 font-bold">
-                    16 products
-                </p>
-
-                <a th:href="@{/admin/editSection/{id}(id=${section.id})}" class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
+                <a href="#"
+                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm">
                     Manage
                 </a>
             </div>
@@ -180,34 +161,36 @@ remove from her comment to see how its look then delete it:)
 
     </div>
 -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <div th:each="section : ${sections}"
+                 class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
 
-        <div th:each="section : ${sections}"
-             class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
+                <img th:if="${section.imageUrl != null and section.imageUrl != ''}"
+                     th:src="@{/images/{img}(img=${section.imageUrl})}"
+                     class="w-[100px] h-[100px] rounded-xl object-cover">
 
-            <img th:src="${section.imageUrl != null and section.imageUrl != ''}
-             ? @{/images/{img}(img=${section.imageUrl})}
-             : @{/images/default.png}"
-            class="w-[100px] h-[100px] rounded-xl object-cover">
+                <img th:unless="${section.imageUrl != null and section.imageUrl != ''}"
+                     th:src="@{/images/default.png}"
+                     class="w-[100px] h-[100px] rounded-xl object-cover">
 
-            <div>
-                <h2 class="font-bold text-lg" th:text="${section.name}"></h2>
+                <div>
+                    <h2 class="font-bold text-lg" th:text="${section.name}">Section name</h2>
 
-                <p class="text-gray-500 text-sm" th:text="${section.description}"></p>
+                    <p class="text-gray-500 text-sm" th:text="${section.description}"></p>
 
-                <p class="text-green-600 font-bold">
-                    <span th:text="${section.productCount}"></span> products
-                </p>
+                    <p class="text-green-600 font-bold">
+                        <span th:text="${section.productCount != null ? section.productCount : 0}"></span> products
+                    </p>
 
-                <a th:href="@{/sections/edit/{id}(id=${section.id})}"
-                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
-                    Manage
-                </a>
+                    <a th:href="@{/sections/edit/{id}(id=${section.id})}"
+                       class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
+                        Manage
+                    </a>
+                </div>
+
             </div>
 
         </div>
 
-    </div>
 
 </main>
 
