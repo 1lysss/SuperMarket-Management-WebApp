@@ -1,43 +1,215 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sections</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deep: "#09637E",
+                        primary: "#088395",
+                        mid: "#7AB2B2",
+                        light: "#EBF4F6",
+                        border: "#c4dde3",
+                        tx: "#0f2e38",
+                        muted: "#4a7a86",
+                    },
+                    fontFamily: {
+                        title: ["'Space Grotesk'", "sans-serif"],
+                        body: ["'DM Sans'", "sans-serif"],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/sidebar.css">
+
+
 </head>
-<body>
+<body class="flex min-h-screen bg-light font-body text-tx">
+<aside class="sidebar">
+    <div class="sidebar-brand">🛒 Supermarket</div>
+    <a th:href="@{/}"> <i class="fas fa-house"></i> Dashboard </a>
+    <a th:href="@{/admin/employee_list}"> <i class="fas fa-users"></i> Employees </a>
+    <a th:href="@{/sections/}" class="active"> <i class="fas fa-layer-group"></i> Sections </a>
+    <a th:href="@{/products/}"> <i class="fas fa-box"></i> Products </a>
+    <a th:href="@{/admin/sales}"> <i class="fas fa-chart-line"></i> Sales </a>
+    <a th:href="@{/admin/stockRequests}"> <i class="fas fa-truck"></i> Stock </a>
+    <a th:href="@{/admin/logs}"> <i class="fas fa-clipboard-list"></i> Logs </a>
+    <a th:href="@{/admin/profile}"> <i class="fas fa-user-cog"></i> Profile </a>
+    <a th:href="@{/logout}"> <i class="fas fa-right-from-bracket"></i> Logout </a>
+</aside>
+<main class="flex-1 p-9 overflow-x-auto">
+    <div class="flex items-center justify-between flex-wrap gap-4 mb-7">
 
-<h1>Sections</h1>
+        <h1 class="font-title font-bold text-2xl text-deep">
+            Manage all supermarket sections
+        </h1>
 
-<a th:href="@{/sections/add}">+ Add Section</a>
+        <div class="flex items-center gap-3">
 
-<br><br>
+            <div class="flex items-center gap-2 bg-white border border-border rounded-lg px-3 py-2">
+                <i class="fas fa-search text-mid text-xs"></i>
+                <input type="text" placeholder="Search sections…"
+                       class="outline-none text-sm text-tx bg-transparent w-48 placeholder-mid" />
+            </div>
 
-<table border="1" cellpadding="8">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="section : ${showSections}">
-            <td th:text="${section.id}"></td>
-            <td th:text="${section.name}"></td>
-            <td th:text="${section.description}"></td>
-            <!-- <td th:text="${section.products != null ? section.products.size() : 0}"></td> -->
-            <td>
-                <a th:href="@{/sections/edit/{id}(id=${section.id})}">Edit</a>
-                &nbsp;
-                <form th:action="@{/sections/delete/{id}(id=${section.id})}"
-                      method="post" style="display:inline;">
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
-    </tbody>
-</table>
+            <a th:href="@{/sections/add}" class="text-sm font-medium bg-primary hover:bg-deep text-white px-4 py-2 rounded-lg transition-colors duration-150 no-underline whitespace-nowrap" > + Add Section
+            </a>
+
+        </div>
+    </div>
+    <!--
+
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+
+        <div  th:each="section : ${sections}" class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
+            <img th:src="@{/images/VEG4.jpg}"
+                 class="w-[100px] h-[100px] rounded-xl object-cover">
+
+            <div>
+                <h2 class="font-bold text-lg">Fruits & Vegetables</h2>
+
+                <p class="text-gray-500 text-sm">
+                    Fresh fruits and vegetables every day
+                </p>
+
+                <p class="text-green-600 font-bold">
+                    25 products
+                </p>
+
+                <a th:href="@{/admin/editSection/{id}(id=${section.id})}"
+                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
+                    Manage
+                </a>
+            </div>
+        </div>
+
+        <div  th:each="section : ${sections}" class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
+            <img th:src="@{/images/FISH4.jpg}" class="w-[100px] h-[100px] rounded-xl object-cover">
+
+            <div>
+                <h2 class="font-bold text-lg">Fish & Meat</h2>
+
+                <p class="text-gray-500 text-sm">
+                    Fresh fish, chicken and meat products
+                </p>
+
+                <p class="text-green-600 font-bold">
+                    18 products
+                </p>
+                <a th:href="@{/admin/editSection/{id}(id=${section.id})}" class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
+                    Manage
+                </a>
+            </div>
+        </div>
+
+
+        <div  th:each="section : ${sections}" class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
+            <img th:src="@{/images/DRINK4.jpg}" class="w-[100px] h-[100px] rounded-xl object-cover">
+
+            <div>
+                <h2 class="font-bold text-lg">Drinks</h2>
+
+                <p class="text-gray-500 text-sm">
+                    Soda, juices and beverages
+                </p>
+
+                <p class="text-green-600 font-bold">
+                    40 products
+                </p>
+                <a th:href="@{/admin/editSection/{id}(id=${section.id})}" class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
+                    Manage
+                </a>
+            </div>
+        </div>
+
+
+        <div  th:each="section : ${sections}" class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
+            <img th:src="@{/images/CHOC4.jpg}" class="w-[100px] h-[100px] rounded-xl object-cover">
+
+            <div>
+                <h2 class="font-bold text-lg">Chocolate & Biscuits</h2>
+
+                <p class="text-gray-500 text-sm">
+                    Chocolates, biscuits and sweet snacks
+                </p>
+
+                <p class="text-green-600 font-bold">
+                    22 products
+                </p>
+
+                <a th:href="@{/admin/editSection/{id}(id=${section.id})}" class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
+                    Manage
+                </a>
+            </div>
+        </div>
+
+
+        <div  th:each="section : ${sections}" class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
+            <img th:src="@{/images/MILK4.jpg}" class="w-[100px] h-[100px] rounded-xl object-cover">
+
+            <div>
+                <h2 class="font-bold text-lg">Milk & Cheese</h2>
+
+                <p class="text-gray-500 text-sm">
+                    Milk, butter, cheese and dairy products
+                </p>
+
+                <p class="text-green-600 font-bold">
+                    16 products
+                </p>
+
+                <a th:href="@{/admin/editSection/{id}(id=${section.id})}" class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
+                    Manage
+                </a>
+            </div>
+        </div>
+
+    </div>
+-->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+
+        <div th:each="section : ${sections}"
+             class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
+
+            <img th:src="${section.imageUrl != null and section.imageUrl != ''}
+             ? @{/images/{img}(img=${section.imageUrl})}
+             : @{/images/default.png}"
+            class="w-[100px] h-[100px] rounded-xl object-cover">
+
+            <div>
+                <h2 class="font-bold text-lg" th:text="${section.name}"></h2>
+
+                <p class="text-gray-500 text-sm" th:text="${section.description}"></p>
+
+                <p class="text-green-600 font-bold">
+                    <span th:text="${section.productCount}"></span> products
+                </p>
+
+                <a th:href="@{/sections/edit/{id}(id=${section.id})}"
+                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
+                    Manage
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
 
 </body>
 </html>
