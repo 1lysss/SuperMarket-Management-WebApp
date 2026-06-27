@@ -1,3 +1,5 @@
+package com.pfe.SuperMarketManager.controller;
+
 import com.pfe.SuperMarketManager.Model.Supplier;
 import com.pfe.SuperMarketManager.service.SupplierService;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class SupplierController {
+public class    SupplierController {
 
     final private SupplierService supplierService;
 
