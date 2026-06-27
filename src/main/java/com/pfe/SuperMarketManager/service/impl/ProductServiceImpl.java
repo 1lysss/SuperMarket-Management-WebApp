@@ -6,7 +6,6 @@ import com.pfe.SuperMarketManager.Repository.ProductRepository;
 import com.pfe.SuperMarketManager.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -16,15 +15,15 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
 
-    @Override
-    public void assignToSection(Product product, Section section) {
-        product.setSection(section);
-    }
-
-    @Override
-    public boolean inSection(Product product) {
-        return product.getSection() != null;
-    }
+//    @Override
+//    public void assignToSection(Product product, Section section) {
+//        product.setSection(section);
+//    }
+//
+//    @Override
+//    public boolean inSection(Product product) {
+//        return product.getSection() != null;
+//    }
 
     @Override
     public void addProduct(Product product) {

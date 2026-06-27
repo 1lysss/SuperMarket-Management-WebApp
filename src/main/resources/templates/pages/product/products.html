@@ -1,46 +1,149 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Page</title>
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            deep:    "#09637E",
+            primary: "#088395",
+            mid:     "#7AB2B2",
+            light:   "#EBF4F6",
+            border:  "#c4dde3",
+            tx:      "#0f2e38",
+            muted:   "#4a7a86",
+          },
+          fontFamily: {
+            title: ["'Space Grotesk'", "sans-serif"],
+            body:  ["'DM Sans'",       "sans-serif"],
+          },
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
 </head>
-<body class="bg-light">
-<div class="container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="h3">Product CRUD</h1>
-        <span class="badge bg-dark fs-6"
-              th:text="'Product count: ' + ${getProductCount}">
-        </span>
-    </div>
-    <div class="card shadow-sm">
-        <div class="card-body">
-            <table class="table table-striped table-hover align-middle">
-                <thead class="table-dark">
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Unit</th>
-                    <th>Price</th>
-                    <th>Expiry Date</th>
-                    <th>Quantity</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="product : ${getAllProducts}">
-                    <td th:text="${product.id}"></td>
-                    <td th:text="${product.name}"></td>
-                    <td th:text="${product.getUnit()}"></td>
-                    <td th:text="${product.unitPrice}"></td>
-                    <td th:text="${product.expiryDate}"></td>
-                    <td th:text="${product.quantity}"></td>
-                </tr>
-                </tbody>
-            </table>
+<body class="flex min-h-screen bg-light font-body text-tx">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">🛒 Supermarket</div>
+    <a th:href="@{/}"><i class="fas fa-house"></i> Dashboard</a>
+    <a th:href="@{/admin/employee_list}"><i class="fas fa-users"></i> Employees</a>
+    <a th:href="@{/sections/}"><i class="fas fa-layer-group"></i> Sections</a>
+    <a th:href="@{/products/}" class="active"><i class="fas fa-box"></i> Products</a>
+    <a th:href="@{/admin/sales}"><i class="fas fa-chart-line"></i> Sales</a>
+    <a th:href="@{/admin/stockRequests}"><i class="fas fa-truck"></i> Stock</a>
+    <a th:href="@{/admin/logs}"><i class="fas fa-clipboard-list"></i> Logs</a>
+    <a th:href="@{/admin/profile}"><i class="fas fa-user-cog"></i> Profile</a>
+    <a th:href="@{/logout}"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </aside>
+
+  <!-- Main -->
+  <div class="flex-1 p-9 overflow-x-auto">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between flex-wrap gap-4 mb-7">
+      <h1 class="font-title font-bold text-2xl text-deep">Products</h1>
+      <div class="flex items-center gap-3">
+        <!-- Search -->
+        <div class="flex items-center gap-2 bg-white border border-border rounded-lg px-3 py-2">
+          <i class="fas fa-search text-mid text-xs"></i>
+          <input id="searchInput" type="text" placeholder="Search products…"
+                 class="outline-none text-sm text-tx bg-transparent w-48 placeholder-mid" />
         </div>
+        <!-- Add button -->
+        <a th:href="@{/products/add}"
+           class="text-sm font-medium bg-primary hover:bg-deep text-white px-4 py-2 rounded-lg transition-colors duration-150 no-underline whitespace-nowrap">
+          + Add Product
+        </a>
+      </div>
     </div>
-</div>
+
+    <!-- Table -->
+    <div class="bg-white border border-border rounded-xl overflow-hidden">
+      <table class="w-full text-sm" id="productTable">
+        <thead class="bg-deep">
+          <tr>
+            <th class="font-title font-medium text-xs uppercase tracking-wider text-white text-left px-4 py-3">Name</th>
+            <th class="font-title font-medium text-xs uppercase tracking-wider text-white text-left px-4 py-3">Unit Price</th>
+            <th class="font-title font-medium text-xs uppercase tracking-wider text-white text-left px-4 py-3">Quantity</th>
+            <th class="font-title font-medium text-xs uppercase tracking-wider text-white text-left px-4 py-3">Unit</th>
+            <th class="font-title font-medium text-xs uppercase tracking-wider text-white text-left px-4 py-3">Section</th>
+            <th class="font-title font-medium text-xs uppercase tracking-wider text-white text-left px-4 py-3">Supplier</th>
+            <th class="font-title font-medium text-xs uppercase tracking-wider text-white text-left px-4 py-3">Expiry</th>
+            <th class="font-title font-medium text-xs uppercase tracking-wider text-white text-left px-4 py-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="product : ${getAllProducts}"
+              class="border-b border-border last:border-0 hover:bg-light transition-colors duration-100">
+            <td class="px-4 py-3 font-medium text-tx" th:text="${product.name}"></td>
+            <td class="px-4 py-3 text-tx" th:text="${product.unitPrice + ' DHs'}"></td>
+            <td class="px-4 py-3 text-tx" th:text="${product.quantity}"></td>
+            <td class="px-4 py-3">
+              <span class="text-xs font-medium px-2 py-1 rounded-full bg-light text-deep border border-border"
+                    th:text="${product.unit != null ? product.unit.label : ''}"></span>
+            </td>
+            <td class="px-4 py-3 text-muted text-xs" th:text="${product.section != null ? product.section.name : '—'}"></td>
+            <td class="px-4 py-3 text-muted text-xs" th:text="${product.supplier != null ? product.supplier.name : '—'}"></td>
+            <td class="px-4 py-3 text-muted text-xs" th:text="${product.expiryDate != null ? product.expiryDate : '—'}"></td>
+            <td class="px-4 py-3">
+              <a th:href="@{/products/edit/{id}(id=${product.id})}"
+                 class="text-xs font-medium px-3 py-1 rounded-md border border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-150 no-underline">
+                Edit
+              </a>
+              <form th:action="@{/products/delete/{id}(id=${product.id})}" method="post" class="inline">
+                <button type="submit"
+                        data-confirm="Are you sure you want to delete this product?"
+                        class="text-xs font-medium px-3 py-1 rounded-md border border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-colors duration-150 ml-1 cursor-pointer bg-transparent">
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <script src="/js/confirm-delete.js"></script>
+  <script>
+    document.querySelectorAll('#productTable tbody tr').forEach(row => {
+      row.querySelectorAll('td').forEach(cell => {
+        cell.dataset.original = cell.innerHTML;
+      });
+    });
+
+    document.getElementById('searchInput').addEventListener('input', function () {
+      const q = this.value.trim().toLowerCase();
+      document.querySelectorAll('#productTable tbody tr').forEach(row => {
+        const cells = row.querySelectorAll('td');
+        cells.forEach(c => c.innerHTML = c.dataset.original);
+        if (!q) { row.style.display = ''; return; }
+        const match = row.textContent.toLowerCase().includes(q);
+        row.style.display = match ? '' : 'none';
+        if (match) {
+          cells.forEach(cell => {
+            if (cell.querySelector('a, button, form, span')) return;
+            cell.innerHTML = cell.dataset.original.replace(
+              new RegExp(`(${q})`, 'gi'),
+              '<mark class="bg-cyan-100 text-deep rounded px-0.5">$1</mark>'
+            );
+          });
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>
