@@ -16,7 +16,7 @@ public class Section {
     private Integer id;
     private String name;
     private String description;
-
+    private String imagePath;
     @OneToMany(mappedBy = "section") // should be same as variable name at @ManyToOne in corresponding entity
     private List<Product> products;  // List of products belong to one section
 }

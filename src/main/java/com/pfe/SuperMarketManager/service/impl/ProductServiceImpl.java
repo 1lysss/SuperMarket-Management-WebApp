@@ -50,6 +50,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findById(id);
     }
 
+    @Override
+    public List<Product> getProductsBySection(Integer sectionId) {
+        return productRepository.findBySectionId(sectionId);
+    }
+
 
 }
 

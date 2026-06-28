@@ -1,198 +1,125 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sections</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sections</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        deep: "#09637E",
-                        primary: "#088395",
-                        mid: "#7AB2B2",
-                        light: "#EBF4F6",
-                        border: "#c4dde3",
-                        tx: "#0f2e38",
-                        muted: "#4a7a86",
-                    },
-                    fontFamily: {
-                        title: ["'Space Grotesk'", "sans-serif"],
-                        body: ["'DM Sans'", "sans-serif"],
-                    },
-                }
-            }
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            deep:    "#09637E",
+            primary: "#088395",
+            mid:     "#7AB2B2",
+            light:   "#EBF4F6",
+            border:  "#c4dde3",
+            tx:      "#0f2e38",
+            muted:   "#4a7a86",
+          },
+          fontFamily: {
+            title: ["'Space Grotesk'", "sans-serif"],
+            body:  ["'DM Sans'",       "sans-serif"],
+          },
         }
-    </script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-    <link rel="stylesheet" href="/css/sidebar.css">
-
-
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
 </head>
 <body class="flex min-h-screen bg-light font-body text-tx">
-<aside class="sidebar">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
     <div class="sidebar-brand">🛒 Supermarket</div>
-    <a th:href="@{/}"> <i class="fas fa-house"></i> Dashboard </a>
-    <a th:href="@{/admin/employee_list}"> <i class="fas fa-users"></i> Employees </a>
-    <a th:href="@{/sections/}" class="active"> <i class="fas fa-layer-group"></i> Sections </a>
-    <a th:href="@{/products/}"> <i class="fas fa-box"></i> Products </a>
-    <a th:href="@{/admin/sales}"> <i class="fas fa-chart-line"></i> Sales </a>
-    <a th:href="@{/admin/stockRequests}"> <i class="fas fa-truck"></i> Stock </a>
-    <a th:href="@{/admin/logs}"> <i class="fas fa-clipboard-list"></i> Logs </a>
-    <a th:href="@{/admin/profile}"> <i class="fas fa-user-cog"></i> Profile </a>
-    <a th:href="@{/logout}"> <i class="fas fa-right-from-bracket"></i> Logout </a>
-</aside>
-<main class="flex-1 p-9 overflow-x-auto">
+    <a th:href="@{/}"><i class="fas fa-house"></i> Dashboard</a>
+    <a th:href="@{/admin/employee_list}"><i class="fas fa-users"></i> Employees</a>
+    <a th:href="@{/sections/}" class="active"><i class="fas fa-layer-group"></i> Sections</a>
+    <a th:href="@{/products/}"><i class="fas fa-box"></i> Products</a>
+    <a th:href="@{/admin/sales}"><i class="fas fa-chart-line"></i> Sales</a>
+    <a th:href="@{/admin/stockRequests}"><i class="fas fa-truck"></i> Stock</a>
+    <a th:href="@{/admin/logs}"><i class="fas fa-clipboard-list"></i> Logs</a>
+    <a th:href="@{/admin/profile}"><i class="fas fa-user-cog"></i> Profile</a>
+    <a th:href="@{/logout}"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </aside>
+
+  <!-- Main -->
+  <div class="flex-1 p-9 overflow-x-auto">
+
+    <!-- Header -->
     <div class="flex items-center justify-between flex-wrap gap-4 mb-7">
+      <h1 class="font-title font-bold text-2xl text-deep">Sections</h1>
+      <a th:href="@{/sections/add}"
+         class="text-sm font-medium bg-primary hover:bg-deep text-white px-4 py-2 rounded-lg transition-colors duration-150 no-underline whitespace-nowrap">
+        + Add Section
+      </a>
+    </div>
 
-        <h1 class="font-title font-bold text-2xl text-deep">
-            Manage sections
-        </h1>
+    <!-- Cards grid — 2 per row -->
+    <div class="grid grid-cols-2 gap-5">
+      <div th:each="section : ${showSections}"
+           class="bg-white border border-border rounded-xl overflow-hidden flex hover:shadow-md transition-shadow duration-150">
 
-        <div class="flex items-center gap-3">
+        <!-- Image — 180px wide, fixed -->
+        <div class="w-44 flex-shrink-0">
+          <img th:if="${section.imagePath != null}"
+               th:src="${section.imagePath}"
+               alt="Section image"
+               class="w-full h-full object-cover" />
+          <!-- Default blank image -->
+          <div th:if="${section.imagePath == null}"
+               class="w-full h-full bg-light flex flex-col items-center justify-center gap-1">
+            <i class="fas fa-image text-2xl text-border"></i>
+            <span class="text-xs text-muted">No image</span>
+          </div>
+        </div>
 
-            <div class="flex items-center gap-2 bg-white border border-border rounded-lg px-3 py-2">
-                <i class="fas fa-search text-mid text-xs"></i>
-                <input type="text" placeholder="Search sections…"
-                       class="outline-none text-sm text-tx bg-transparent w-48 placeholder-mid" />
-            </div>
+        <!-- Content -->
+        <div class="flex flex-col justify-between p-5 flex-1 min-w-0">
+          <div>
+            <h2 class="font-title font-bold text-lg text-deep leading-tight mb-1 truncate"
+                th:text="${section.name}"></h2>
+            <p class="text-sm text-muted line-clamp-2"
+               th:text="${section.description != null and !section.description.isEmpty()} ? ${section.description} : 'No description provided.'">
+            </p>
+          </div>
 
-            <a th:href="@{/sections/add}" class="text-sm font-medium bg-primary hover:bg-deep text-white px-4 py-2 rounded-lg transition-colors duration-150 no-underline whitespace-nowrap" > + Add Section
+          <div class="flex items-center justify-between mt-4">
+            <!-- Product count link -->
+            <a th:href="@{/products/bySection/{id}(id=${section.id})}"
+               class="text-sm font-medium text-primary hover:text-deep transition-colors duration-150 no-underline flex items-center gap-1">
+              <span th:text="${section.products != null ? section.products.size() : 0}"></span>
+              <span>products</span>
+              <i class="fas fa-arrow-right text-xs ml-1"></i>
             </a>
 
+            <!-- Actions -->
+            <div class="flex items-center gap-2">
+              <a th:href="@{/sections/edit/{id}(id=${section.id})}"
+                 class="text-xs font-medium px-3 py-1 rounded-md border border-primary text-primary hover:bg-primary hover:text-white transition-colors duration-150 no-underline">
+                Edit
+              </a>
+              <form th:action="@{/sections/delete/{id}(id=${section.id})}" method="post" class="inline">
+                <button type="submit"
+                        data-confirm="Are you sure you want to delete this section? All associated products will be unassigned."
+                        class="text-xs font-medium px-3 py-1 rounded-md border border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-colors duration-150 cursor-pointer bg-transparent">
+                  Delete
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
+
+      </div>
     </div>
 
+  </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-<!--
-
-        <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
-            <img src="/images/VEG4.jpg"
-                 class="w-[100px] h-[100px] rounded-xl object-cover">
-
-            <div>
-                <h2 class="font-bold text-lg">Fruits & Vegetables</h2>
-                <p class="text-gray-500 text-sm">Fresh fruits and vegetables every day</p>
-                <p class="text-green-600 font-bold">25 products</p>
-
-                <a href="#"
-                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm">
-                    Manage
-                </a>
-            </div>
-        </div>
-
-
-        <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
-            <img src="/images/FISH4.jpg"
-                 class="w-[100px] h-[100px] rounded-xl object-cover">
-
-            <div>
-                <h2 class="font-bold text-lg">Fish & Meat</h2>
-                <p class="text-gray-500 text-sm">Fresh fish, chicken and meat products</p>
-                <p class="text-green-600 font-bold">18 products</p>
-
-                <a href="#"
-                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm">
-                    Manage
-                </a>
-            </div>
-        </div>
-
-
-        <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
-            <img src="/images/DRINK4.jpg"
-                 class="w-[100px] h-[100px] rounded-xl object-cover">
-
-            <div>
-                <h2 class="font-bold text-lg">Drinks</h2>
-                <p class="text-gray-500 text-sm">Soda, juices and beverages</p>
-                <p class="text-green-600 font-bold">40 products</p>
-
-                <a href="#"
-                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm">
-                    Manage
-                </a>
-            </div>
-        </div>
-
-
-        <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
-            <img src="/images/CHOC4.jpg"
-                 class="w-[100px] h-[100px] rounded-xl object-cover">
-
-            <div>
-                <h2 class="font-bold text-lg">Chocolate & Biscuits</h2>
-                <p class="text-gray-500 text-sm">Chocolates, biscuits and sweet snacks</p>
-                <p class="text-green-600 font-bold">22 products</p>
-
-                <a href="#"
-                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm">
-                    Manage
-                </a>
-            </div>
-        </div>
-
-
-        <div class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
-            <img src="/images/MILK4.jpg"
-                 class="w-[100px] h-[100px] rounded-xl object-cover">
-
-            <div>
-                <h2 class="font-bold text-lg">Milk & Cheese</h2>
-                <p class="text-gray-500 text-sm">Milk, butter, cheese and dairy products</p>
-                <p class="text-green-600 font-bold">16 products</p>
-
-                <a href="#"
-                   class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm">
-                    Manage
-                </a>
-            </div>
-        </div>
-
-    </div>
--->
-            <div th:each="section : ${sections}"
-                 class="bg-white p-5 rounded-xl shadow hover:shadow-lg transition flex gap-4 items-center">
-
-                <img th:if="${section.imageUrl != null and section.imageUrl != ''}"
-                     th:src="@{/images/{img}(img=${section.imageUrl})}"
-                     class="w-[100px] h-[100px] rounded-xl object-cover">
-
-                <img th:unless="${section.imageUrl != null and section.imageUrl != ''}"
-                     th:src="@{/images/default.png}"
-                     class="w-[100px] h-[100px] rounded-xl object-cover">
-
-                <div>
-                    <h2 class="font-bold text-lg" th:text="${section.name}">Section name</h2>
-
-                    <p class="text-gray-500 text-sm" th:text="${section.description}"></p>
-
-                    <p class="text-green-600 font-bold">
-                        <span th:text="${section.productCount != null ? section.productCount : 0}"></span> products
-                    </p>
-
-                    <a th:href="@{/sections/edit/{id}(id=${section.id})}"
-                       class="inline-block mt-2 text-white bg-primary hover:bg-deep px-3 py-1 rounded-md text-sm transition">
-                        Manage
-                    </a>
-                </div>
-
-            </div>
-
-        </div>
-
-
-</main>
+  <script src="/js/confirm-delete.js"></script>
 
 </body>
 </html>

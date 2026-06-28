@@ -17,4 +17,7 @@ public interface ProductService {
     void updateProduct(Product product);
     List<Product> getAllProducts();
     Optional<Product> getProductById(Integer id);
+
+
+    List<Product> getProductsBySection(Integer sectionId);
 }

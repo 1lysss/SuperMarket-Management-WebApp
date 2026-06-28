@@ -1,100 +1,203 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title th:text="${section.id != null} ? 'Edit Section' : 'Add Section'">Section Form</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title th:text="${section.id != null} ? 'Edit Section' : 'Add Section'">Section Form</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        deep: "#09637E",
-                        primary: "#088395",
-                        mid: "#7AB2B2",
-                        light: "#EBF4F6",
-                        border: "#c4dde3",
-                        tx: "#0f2e38",
-                        muted: "#4a7a86",
-                    },
-                    fontFamily: {
-                        title: ["'Space Grotesk'", "sans-serif"],
-                        body: ["'DM Sans'", "sans-serif"],
-                    },
-                }
-            }
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            deep:    "#09637E",
+            primary: "#088395",
+            mid:     "#7AB2B2",
+            light:   "#EBF4F6",
+            border:  "#c4dde3",
+            tx:      "#0f2e38",
+            muted:   "#4a7a86",
+          },
+          fontFamily: {
+            title: ["'Space Grotesk'", "sans-serif"],
+            body:  ["'DM Sans'",       "sans-serif"],
+          },
         }
-    </script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="/css/sidebar.css">
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
 </head>
-
 <body class="flex min-h-screen bg-light font-body text-tx">
-<aside class="sidebar">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
     <div class="sidebar-brand">🛒 Supermarket</div>
-    <a th:href="@{/}"> <i class="fas fa-house"></i> Dashboard </a>
-    <a th:href="@{/admin/employee_list}"> <i class="fas fa-users"></i> Employees </a>
-    <a th:href="@{/sections/}" class="active"> <i class="fas fa-layer-group"></i> Sections </a>
-    <a th:href="@{/products/}"> <i class="fas fa-box"></i> Products </a>
-    <a th:href="@{/admin/sales}"> <i class="fas fa-chart-line"></i> Sales </a>
-    <a th:href="@{/admin/stockRequests}"> <i class="fas fa-truck"></i> Stock </a>
-    <a th:href="@{/admin/logs}"> <i class="fas fa-clipboard-list"></i> Logs </a>
-    <a th:href="@{/admin/profile}"> <i class="fas fa-user-cog"></i> Profile </a>
-    <a th:href="@{/logout}"> <i class="fas fa-right-from-bracket"></i> Logout </a>
-</aside>
-<div class="flex-1 p-9">
-    <!-- Breadcrumb  IDK WAX N5DM B admin/sections wla n5liha section :<a th:href="@{/sections/}"-->
+    <a th:href="@{/}"><i class="fas fa-house"></i> Dashboard</a>
+    <a th:href="@{/admin/employee_list}"><i class="fas fa-users"></i> Employees</a>
+    <a th:href="@{/sections/}" class="active"><i class="fas fa-layer-group"></i> Sections</a>
+    <a th:href="@{/products/}"><i class="fas fa-box"></i> Products</a>
+    <a th:href="@{/admin/sales}"><i class="fas fa-chart-line"></i> Sales</a>
+    <a th:href="@{/admin/stockRequests}"><i class="fas fa-truck"></i> Stock</a>
+    <a th:href="@{/admin/logs}"><i class="fas fa-clipboard-list"></i> Logs</a>
+    <a th:href="@{/admin/profile}"><i class="fas fa-user-cog"></i> Profile</a>
+    <a th:href="@{/logout}"><i class="fas fa-right-from-bracket"></i> Logout</a>
+  </aside>
+
+  <!-- Main -->
+  <div class="flex-1 p-9">
+
+    <!-- Breadcrumb -->
     <div class="flex items-center gap-2 mb-7">
-        <a th:href="@{/sections/}"
-           class="text-sm text-muted hover:text-deep transition-colors duration-150 no-underline">
-            <i class="fas fa-arrow-left mr-1"></i> Section
-        </a>
-        <span class="text-border text-sm">/</span>
-        <h1 class="font-title font-bold text-2xl text-deep m-0"
-            th:text="${section.id != null} ? 'Edit Section' : 'Add Section'">
-            Add Section
-        </h1>
+      <a th:href="@{/sections/}"
+         class="text-sm text-muted hover:text-deep transition-colors duration-150 no-underline">
+        <i class="fas fa-arrow-left mr-1"></i> Sections
+      </a>
+      <span class="text-border text-sm">/</span>
+      <h1 class="font-title font-bold text-2xl text-deep m-0"
+          th:text="${section.id != null} ? 'Edit Section' : 'Add Section'">
+        Add Section
+      </h1>
     </div>
+
     <div class="bg-white border border-border rounded-xl p-8 max-w-xl">
-        <form th:action="${section.id != null} ? @{/sections/edit/{id}(id=${section.id})} : @{/sections/add}"
-              th:object="${section}" method="post" enctype="multipart/form-data">
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-deep mb-1">Section Name</label>
-                <input type="text" th:field="*{name}" placeholder="e.g. Fruits & Vegetables"
-                       class="w-full text-sm border border-border rounded-lg px-3 py-2 outline-none
-                      focus:border-primary focus:ring-2 focus:ring-primary/10" required />
-            </div>
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-deep mb-1">Description</label>
-                <input type="text" th:field="*{description}" placeholder="Short description"
-                       class="w-full text-sm border border-border rounded-lg px-3 py-2 outline-none
-                      focus:border-primary focus:ring-2 focus:ring-primary/10" />
-            </div>
-            <div class="mb-6">
-                <label class="block text-sm font-medium text-deep mb-1">Image</label>
-                <input type="file" name="imageFile"
-                       class="w-full text-sm border border-border rounded-lg px-3 py-2 bg-white" />
-            </div>
-            <div class="flex items-center gap-3">
-                <button type="submit"
-                        class="text-sm font-medium bg-primary hover:bg-deep text-white px-5 py-2 rounded-lg transition">
-                    Save Section
-                </button>
-                <a th:href="@{/sections/}"
-                   class="text-sm text-muted border border-border rounded-lg px-4 py-2 hover:border-mid hover:text-deep transition">
-                    Cancel
-                </a>
-            </div>
 
-        </form>
+      <!-- ADD FORM -->
+      <form th:if="${section.id == null}"
+            th:action="@{/sections/add}"
+            th:object="${section}"
+            method="post"
+            enctype="multipart/form-data">
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-deep mb-1">Section Name</label>
+          <input type="text" th:field="*{name}" placeholder="e.g. Dairy"
+                 class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 placeholder-mid" required />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-deep mb-1">
+            Description <span class="text-muted font-normal">(optional)</span>
+          </label>
+          <textarea th:field="*{description}" placeholder="Brief description of this section…" rows="3"
+                    class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 placeholder-mid resize-none"></textarea>
+        </div>
+
+        <!-- Image upload -->
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-deep mb-1">
+            Image <span class="text-muted font-normal">(optional)</span>
+          </label>
+          <!-- Preview box -->
+          <div id="preview-add"
+               class="w-full h-48 border-2 border-dashed border-border rounded-lg flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-primary transition-colors duration-150 bg-light overflow-hidden"
+               onclick="document.getElementById('image-add').click()">
+            <img id="preview-img-add" class="hidden w-full h-full object-cover" />
+            <div id="preview-placeholder-add" class="flex flex-col items-center gap-2">
+              <i class="fas fa-cloud-upload-alt text-2xl text-mid"></i>
+              <span class="text-sm text-muted">Click to upload image</span>
+              <span class="text-xs text-border">PNG, JPG up to 5MB</span>
+            </div>
+          </div>
+          <input type="file" id="image-add" name="image" accept="image/*" class="hidden"
+                 onchange="previewImage(this, 'preview-img-add', 'preview-placeholder-add')" />
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button type="submit"
+                  class="text-sm font-medium bg-primary hover:bg-deep text-white px-5 py-2 rounded-lg transition-colors duration-150 cursor-pointer border-0">
+            Save Section
+          </button>
+          <a th:href="@{/sections/}"
+             class="text-sm text-muted border border-border rounded-lg px-4 py-2 hover:border-mid hover:text-deep transition-colors duration-150 no-underline">
+            Cancel
+          </a>
+        </div>
+
+      </form>
+
+      <!-- EDIT FORM -->
+      <form th:if="${section.id != null}"
+            th:action="@{/sections/edit/{id}(id=${section.id})}"
+            th:object="${section}"
+            method="post"
+            enctype="multipart/form-data">
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-deep mb-1">Section Name</label>
+          <input type="text" th:field="*{name}"
+                 class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10" required />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-deep mb-1">
+            Description <span class="text-muted font-normal">(optional)</span>
+          </label>
+          <textarea th:field="*{description}" rows="3"
+                    class="w-full text-sm text-tx border border-border rounded-lg px-3 py-2 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 resize-none"></textarea>
+        </div>
+
+        <!-- Image upload — shows current image if exists -->
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-deep mb-1">
+            Image <span class="text-muted font-normal">(leave empty to keep current)</span>
+          </label>
+          <div id="preview-edit"
+               class="w-full h-48 border-2 border-dashed border-border rounded-lg flex flex-col items-center justify-center gap-2 cursor-pointer hover:border-primary transition-colors duration-150 bg-light overflow-hidden"
+               onclick="document.getElementById('image-edit').click()">
+            <!-- Show existing image if available -->
+            <img th:if="${section.imagePath != null}"
+                 th:src="${section.imagePath}"
+                 id="preview-img-edit"
+                 class="w-full h-full object-cover" />
+            <img th:if="${section.imagePath == null}"
+                 id="preview-img-edit"
+                 class="hidden w-full h-full object-cover" />
+            <div id="preview-placeholder-edit"
+                 th:class="${section.imagePath != null} ? 'hidden flex flex-col items-center gap-2' : 'flex flex-col items-center gap-2'">
+              <i class="fas fa-cloud-upload-alt text-2xl text-mid"></i>
+              <span class="text-sm text-muted">Click to upload new image</span>
+              <span class="text-xs text-border">PNG, JPG up to 5MB</span>
+            </div>
+          </div>
+          <input type="file" id="image-edit" name="image" accept="image/*" class="hidden"
+                 onchange="previewImage(this, 'preview-img-edit', 'preview-placeholder-edit')" />
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button type="submit"
+                  class="text-sm font-medium bg-primary hover:bg-deep text-white px-5 py-2 rounded-lg transition-colors duration-150 cursor-pointer border-0">
+            Update Section
+          </button>
+          <a th:href="@{/sections/}"
+             class="text-sm text-muted border border-border rounded-lg px-4 py-2 hover:border-mid hover:text-deep transition-colors duration-150 no-underline">
+            Cancel
+          </a>
+        </div>
+
+      </form>
 
     </div>
-</div>
+  </div>
+
+  <script>
+    function previewImage(input, imgId, placeholderId) {
+      const file = input.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.getElementById(imgId);
+        const placeholder = document.getElementById(placeholderId);
+        img.src = e.target.result;
+        img.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
 
 </body>
 </html>

@@ -71,6 +71,12 @@ public class ProductController {
         productService.removeProduct(id);
         return "redirect:/products/";
     }
+
+    @GetMapping("/products/bySection/{sectionId}")
+    public String showProductsBySection(@PathVariable Integer sectionId, Model model) {
+        model.addAttribute("getAllProducts", productService.getProductsBySection(sectionId));
+        return "pages/product/products";
+    }
 }
 
 

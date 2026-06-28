@@ -9,10 +9,9 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findBySection(Section section);
-    Product findById(Product product);
+    List<Product> findBySectionId(Integer sectionId);
     Product findByName(Product product);
     long count();
-    List<Product> findBySectionId(Integer sectionId);
 }
 
 
