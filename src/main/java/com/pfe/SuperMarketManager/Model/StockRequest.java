@@ -1,6 +1,9 @@
 package com.pfe.SuperMarketManager.Model;
 
+import com.pfe.SuperMarketManager.Model.Enums.Status;
+import com.pfe.SuperMarketManager.Model.Enums.Unit;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
@@ -10,28 +13,26 @@ import java.time.LocalDate;
 @Table(name = "stock_requests")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 
 public class StockRequest {
-    public enum Status {
-        PENDING,
-        DECLINED,
-        APPROVED
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private BigDecimal quantityRequested;
-    private Status status;
     private LocalDate requestDate;
+
+    @Enumerated(EnumType.STRING)
+    private Unit unit;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-
-
 }
-
 
 
 // MANY REQUESTS CAN BE OF THE SAME PRODUCT
