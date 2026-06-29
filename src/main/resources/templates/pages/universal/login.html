@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — Supermarket Manager</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            deep:    "#09637E",
+            primary: "#088395",
+            mid:     "#7AB2B2",
+            light:   "#EBF4F6",
+            border:  "#c4dde3",
+            tx:      "#0f2e38",
+            muted:   "#4a7a86",
+          },
+          fontFamily: {
+            title: ["'Space Grotesk'", "sans-serif"],
+            body:  ["'DM Sans'",       "sans-serif"],
+          },
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <style>
+    .left-panel {
+      background: linear-gradient(160deg, #09637E 0%, #088395 60%, #7AB2B2 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decorative circles */
+    .left-panel::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.05);
+      top: -100px; left: -100px;
+    }
+    .left-panel::after {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      bottom: -80px; right: -80px;
+    }
+    .circle-mid {
+      position: absolute;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      bottom: 140px; left: 40px;
+    }
+  </style>
+</head>
+<body class="flex min-h-screen font-body">
+
+  <!-- Left panel -->
+  <div class="left-panel hidden lg:flex flex-col justify-between w-1/2 p-14 text-white">
+    <div class="relative z-10">
+      <div class="font-title font-bold text-2xl tracking-tight">🛒 Supermarket Manager</div>
+    </div>
+
+    <div class="relative z-10">
+      <h1 class="font-title font-bold text-4xl leading-tight mb-4">
+        Welcome back.<br/>Let's keep things running.
+      </h1>
+      <p class="text-white/70 text-base font-light leading-relaxed max-w-sm">
+        From managing stock to overseeing sales — everything you need is one login away.
+      </p>
+    </div>
+
+    <div class="relative z-10 flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+        <i class="fas fa-shield-halved text-white text-xs"></i>
+      </div>
+      <span class="text-white/60 text-sm">Secure access</span>
+    </div>
+
+    <div class="circle-mid"></div>
+  </div>
+
+  <!-- Right panel — form -->
+  <div class="flex flex-col justify-center w-full lg:w-1/2 bg-light px-8 sm:px-16 lg:px-24">
+    <div class="max-w-sm w-full mx-auto">
+
+      <!-- Mobile brand (hidden on desktop) -->
+      <div class="lg:hidden font-title font-bold text-xl text-deep mb-8">🛒 Supermarket Manager</div>
+
+      <h2 class="font-title font-bold text-2xl text-deep mb-1">Sign in</h2>
+      <p class="text-sm text-muted mb-8">Enter your credentials to access your dashboard.</p>
+
+      <!-- Error message (shown by Spring Security on bad credentials) -->
+      <div th:if="${param.error}"
+           class="mb-5 px-4 py-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-sm flex items-center gap-2">
+        <i class="fas fa-circle-exclamation text-xs"></i>
+        Invalid username or password.
+      </div>
+
+      <!-- Logout message -->
+      <div th:if="${param.logout}"
+           class="mb-5 px-4 py-3 rounded-lg bg-green-50 border border-green-200 text-green-700 text-sm flex items-center gap-2">
+        <i class="fas fa-circle-check text-xs"></i>
+        You have been logged out successfully.
+      </div>
+
+      <form th:action="@{/login}" method="post">
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-deep mb-1">Username</label>
+          <input type="text" name="username" placeholder="Enter your username" autofocus
+                 class="w-full text-sm text-tx bg-white border border-border rounded-lg px-3 py-2.5 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 placeholder-mid" required />
+        </div>
+
+        <div class="mb-6">
+          <label class="block text-sm font-medium text-deep mb-1">Password</label>
+          <div class="relative">
+            <input type="password" id="password" name="password" placeholder="Enter your password"
+                   class="w-full text-sm text-tx bg-white border border-border rounded-lg px-3 py-2.5 outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 placeholder-mid pr-10" required />
+            <button type="button" onclick="togglePassword()"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-deep transition-colors duration-150 bg-transparent border-0 cursor-pointer">
+              <i id="eye-icon" class="fas fa-eye text-sm"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit"
+                class="w-full text-sm font-medium bg-primary hover:bg-deep text-white py-2.5 rounded-lg transition-colors duration-150 cursor-pointer border-0">
+          Sign In
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const input = document.getElementById('password');
+      const icon  = document.getElementById('eye-icon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.classList.replace('fa-eye', 'fa-eye-slash');
+      } else {
+        input.type = 'password';
+        icon.classList.replace('fa-eye-slash', 'fa-eye');
+      }
+    }
+  </script>
+
+</body>
+</html>
