@@ -14,4 +14,5 @@ import java.util.Optional;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     long countByRole(Role role);
+
 }
