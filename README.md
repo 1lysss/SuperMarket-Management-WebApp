@@ -22,4 +22,4 @@ spring.thymeleaf.check-template-location=false
 
 
 # Future Improvements:
- - Might considerRewriting the frontend with reactjs instead of thymeleaf
+ - Might consider Rewriting the frontend with reactjs instead of thymeleaf
