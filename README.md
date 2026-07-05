@@ -19,3 +19,7 @@ spring.thymeleaf.check-template-location=false
 - PostgreSQL : https://www.postgresql.org/download/
 - Intellij idea: https://www.jetbrains.com/idea/download/?section=windows
 - Spring documentation : https://spring.io/guides/tutorials/rest
+
+
+Future Improvements:
+# Rewriting the frontend with reactjs instead of thymeleaf
