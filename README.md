@@ -1,6 +1,3 @@
-![Logo](tracking/logo-sp.png)
-
-
 ```
 spring.application.name=SuperMarketManager
 spring.datasource.url=jdbc:postgresql://localhost:5432/supermarket_db
