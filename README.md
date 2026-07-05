@@ -3,7 +3,7 @@ spring.application.name=SuperMarketManager
 spring.datasource.url=jdbc:postgresql://localhost:5432/supermarket_db
 spring.datasource.username=postgres
 
--> spring.datasource.password= hna ktb mot de pass dyalek
+-> spring.datasource.password= 
 
 spring.datasource.driver-class-name=org.postgresql.Driver
 spring.jpa.hibernate.ddl-auto=create-drop
