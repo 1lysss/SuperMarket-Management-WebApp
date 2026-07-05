@@ -21,5 +21,5 @@ spring.thymeleaf.check-template-location=false
 - Spring documentation : https://spring.io/guides/tutorials/rest
 
 
-Future Improvements:
-# Rewriting the frontend with reactjs instead of thymeleaf
+# Future Improvements:
+ - Might considerRewriting the frontend with reactjs instead of thymeleaf
