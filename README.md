@@ -1,3 +1,6 @@
+# Current state:
+ The project is unfinished, i still have to master my craft and resume developping this, i will ditch thymeleaf and introduce reactjs, the project will then evolve and have a full shape, InchAllah.
+
 ```
 spring.application.name=SuperMarketManager
 spring.datasource.url=jdbc:postgresql://localhost:5432/supermarket_db
@@ -19,7 +22,3 @@ spring.thymeleaf.check-template-location=false
 - PostgreSQL : https://www.postgresql.org/download/
 - Intellij idea: https://www.jetbrains.com/idea/download/?section=windows
 - Spring documentation : https://spring.io/guides/tutorials/rest
-
-
-# Future Improvements:
- - Might consider Rewriting the frontend with reactjs instead of thymeleaf
